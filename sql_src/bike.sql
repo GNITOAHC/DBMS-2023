@@ -1,3 +1,7 @@
+drop database if exists Youbike;
+create database Youbike;
+use Youbike;
+
 CREATE TABLE `User` (
     `CardID` int  NOT NULL ,
     `Name` varchar(20)  NOT NULL ,
