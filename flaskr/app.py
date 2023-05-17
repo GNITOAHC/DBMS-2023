@@ -15,7 +15,6 @@ app = Flask(
 )
 app.app_context().push()
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:password@localhost/Youbike"
-app.config["SECRET_KEY"] = os.urandom(24)
 db = SQLAlchemy(app)
 Session = sessionmaker(bind=db.engine)
 
