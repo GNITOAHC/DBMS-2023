@@ -8,7 +8,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
     CardID = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(20), nullable=False)
-    Rent_bike_serial = db.Column(db.Integer, nullable=False)
+    Rent_bike_serial = db.Column(db.Integer)
     
 class Bike(db.Model):
     Serial_num = db.Column(db.Integer, primary_key=True)
