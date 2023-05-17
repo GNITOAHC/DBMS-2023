@@ -5,7 +5,7 @@ use Youbike;
 CREATE TABLE `User` (
     `CardID` int  NOT NULL ,
     `Name` varchar(20)  NOT NULL ,
-    `Rent_bike_serial` int  NOT NULL ,
+    `Rent_bike_serial` int,
     PRIMARY KEY (
         `CardID`
     )
