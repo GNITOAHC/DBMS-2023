@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subordinate Details</title>
+</head>
+<body>
+    <h1>Subordinate Details</h1>
+    <table>
+        <tr>
+            <th>Bike_Ssn</th>
+            <th>Location_Name</th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee[0] }}</td>
+            <td>{{ employee[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
