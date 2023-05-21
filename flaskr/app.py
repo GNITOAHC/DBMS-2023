@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, abort, redirect, url_for
 from database import db
 
 from user import user_blueprint
+from api import api_blueprint
 
 
 app = Flask(
@@ -17,6 +18,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'YOUR_PASSWORD'
 app.config['MYSQL_DB'] = 'Youbike'
 app.config['SECRET_KEY'] = 'secret'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 db.init_app(app)
 
@@ -27,6 +29,7 @@ def index():
 
 # register blueprint
 app.register_blueprint(user_blueprint, url_prefix='/user')
+app.register_blueprint(api_blueprint, url_prefix='/api')
 
 # # error handler 404
 # @app.errorhandler(404)

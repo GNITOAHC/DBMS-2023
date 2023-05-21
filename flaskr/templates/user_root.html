@@ -15,5 +15,6 @@
     <p>CardId: {{request.args.get("card_id")}}</p>
     <a href="{{url_for('user.user_profile', **request.args)}}">Profile</a>
     <a href="{{url_for('user.user_history', **request.args)}}">History</a>
+    <a href="{{url_for('user.user_rent', **request.args)}}">Rent bike</a>
   </body>
 </html>
