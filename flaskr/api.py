@@ -15,35 +15,49 @@ def user_rent_api():
 
     # query data from db
     cursor = db.connection.cursor()
+
     # query user data
     cursor.execute(f'''
         SELECT * FROM User
         WHERE CardID = {card_id};
     ''')
-    row_headers=[x[0] for x in cursor.description]
-    result = cursor.fetchone()
-    if result is None:
+    user = cursor.fetchone()
+    if user is None:
         abort(404, "User not found")
-    user = dict(zip(row_headers, result))
-    
+
     if user is None:  # if user not exist
         print("User not found")
         abort(404, "User not found")
-    elif user.Rent_bike_serial is not None:  # if user already rent a bike
+    elif user['Rent_bike_serial'] is not None:  # if user already rent a bike
         print("User can't rent")
         abort(404, "User can't rent")
-    bike = db.session.get(Bike, int(bike_serial))  # get the bike by pk
+    
+    # query bike data
+    cursor.execute(f'''
+        SELECT * FROM Bike
+        WHERE Serial_num = {bike_serial}
+    ''')
+    bike = cursor.fetchone()
     if bike is None:  # if bike not exist
         print("Bike not found")
         abort(404, "Bike not found")
-    elif bike.Is_using is True or bike.Is_broken is True:  # if bike is not avalible
+    elif bike['Is_using'] is True or bike['Is_broken'] is True:  # if bike is not avalible
         print("Bike is not avalible")
         abort(404, "Bike is not avalible")
 
     # update db data
-    bike.Is_using = True
-    user.Rent_bike_serial = bike_serial
-    db.session.commit()
+    cursor.execute(f'''
+        UPDATE Bike
+        SET Is_using = 1
+        WHERE Serial_num = {bike_serial};
+    ''')
+    db.connection.commit()
+    cursor.execute(f'''
+        UPDATE User
+        SET Rent_bike_serial = {bike_serial}
+        WHERE CardID = {card_id};
+    ''')
+    db.connection.commit()
 
     # redirct to user homepage
-    return redirect(url_for("user_root", card_id=card_id))
+    return redirect(url_for("user.user_root", card_id=card_id))

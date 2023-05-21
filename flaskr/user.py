@@ -97,12 +97,10 @@ def user_rent():
 
     # post: redirect to renting api
     if request.method == "POST":
-        return
-        # TODO: refactor
-        # bike_serial = request.form["bsf"]
-        # return redirect(
-        #     url_for("user_rent_api", bike_serial=bike_serial, card_id=card_id)
-        # )
+        bike_serial = request.form["bsf"]
+        return redirect(
+            url_for("api.user_rent_api", bike_serial=bike_serial, card_id=card_id)
+        )
 
     # get: generate the form to gather the renting info
     else:

@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, abort, redirect, url_for
+from dotenv import load_dotenv
+import os
 
 from database import db
 
@@ -12,12 +14,13 @@ app = Flask(
     static_folder='static',
     template_folder='templates'
 )
+load_dotenv()
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'YOUR_PASSWORD'
+app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
+app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['MYSQL_DB'] = 'Youbike'
-app.config['SECRET_KEY'] = 'secret'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 db.init_app(app)
