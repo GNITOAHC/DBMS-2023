@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Employee Maintenance Panel</h1>
-    <a href="/employee_root">Employee Home</a>
+    <a href="/employee/employee_root">Employee Home</a>
 
     <h2>Bike list</h2>
     {% for r in result %} 
@@ -14,7 +14,7 @@
     <p>
       <span
         >Serial:
-        <a href="{{url_for('employee_maintain_serial', bike_serial=r.Serial_num, **request.args)}}"
+        <a href="{{url_for('employee.employee_maintain_serial', bike_serial=r.Serial_num, **request.args)}}"
           >{{r.Serial_num}}</a
         >
       </span>

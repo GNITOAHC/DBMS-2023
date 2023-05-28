@@ -34,7 +34,7 @@ def index():
 # register blueprint
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(api_blueprint, url_prefix='/api')
-app.register_blueprint(employee, url_prefix='/api')
+app.register_blueprint(employee, url_prefix='/employee')
 
 # # error handler 404
 # @app.errorhandler(404)

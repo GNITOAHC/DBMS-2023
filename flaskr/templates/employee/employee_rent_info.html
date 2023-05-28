@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>Rent History</h1>
-    <a href="/employee_root">Employee Home</a>
+    <a href="/employee/employee_root">Employee Home</a>
     <form action="/employee/rentInfo" method="get">
       <div>
         <label for="rent_serial"> Rent serial: </label>
@@ -17,7 +17,7 @@
         <button type="submit" class="btn btn-primary">Search rent info</button>
       </div>
     </form>
-    {% if r.rowcount == 0 %}
+    {% if row == 0 %}
     <p>No data found.</p>
     {% else %}
     <p>Rent serial: {{request.args.get("rent_serial")}}</p>
