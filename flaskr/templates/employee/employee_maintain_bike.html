@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Maintain Bike Panel</title>
+  </head>
+  <body>
+    <h1>Employee Profile</h1>
+    <a href="/employee_root">Employee Home</a>
+
+    <h2>Bike {{bike_serial}}</h2>
+    {% if r.Is_using == true %}
+    <p>Factory: {{r.Factory}}</p>
+    <p>Maintenance record: {{r.Maintenance_record}}</p>
+    <p>Using</p>
+    {% else %}
+    {% if r.Is_broken == true %}
+    {% set broken = "Broken" %}
+    {% else %}
+    {% set broken = "Not Broken" %}
+    {% endif %}
+    <p>Factory: {{r.Factory}}</p>
+    <p>Maintenance record: {{r.Maintenance_record}}</p>
+    <p>{{broken}}</p>
+    <p>Park at {{r.Park_loc}} (Street: {{r.Street}}, District: {{r.District}}, City: {{r.City}})</p>
+    <p>Not using</p>
+    {% endif %}
+    <a href="/employee/maintain?emp_id={{emp_id}}">Back</a>
+  </body>
+</html>

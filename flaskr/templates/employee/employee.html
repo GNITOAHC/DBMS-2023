@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee profile</title>
+  </head>
+  <body>
+    <h1>Employee Profile</h1>
+    <a href="/employee_root">Employee home</a>
+    <p>Name: {{name}}</p>
+    <p>Sex: {{sex}}</p>
+    <p>Ssn: {{request.args.get("emp_id")}}</p>
+
+    <a href="{{url_for('employee_control', **request.args)}}">Control Location</a>
+    <a href="{{url_for('employee_maintain', **request.args)}}">Control Bikes</a>
+    <p />
+    <a href="{{url_for('employee_user_history', **request.args)}}">User History</a>
+    <a href="{{url_for('employee_rent_info', **request.args)}}">Rent info</a>
+  </body>
+</html>
