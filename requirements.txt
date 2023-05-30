@@ -1,4 +1,3 @@
 flask==2.3.2
-SQLAlchemy==2.0.13
-flask-SQLAlchemy
-mysqlclient
+flask_mysqldb
+python-dotenv

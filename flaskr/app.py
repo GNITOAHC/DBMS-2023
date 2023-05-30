@@ -4,7 +4,9 @@ import os
 
 from database import db
 
+
 from manager_route import manager_blueprint
+
 from user import user_blueprint
 from api import api_blueprint
 
@@ -65,3 +67,4 @@ app.register_blueprint(api_blueprint, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
