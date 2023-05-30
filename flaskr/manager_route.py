@@ -1,14 +1,18 @@
-from app import app
-from app import db
-from flask import render_template
+from flask import Blueprint, render_template, jsonify, request, abort, url_for, redirect
+from database import db
 
-@app.route('/manager/check_subordinates', methods=['GET'])
+
+manager_blueprint = Blueprint('manager', __name__, template_folder='templates')
+
+
+
+@manager_blueprint.route('/manager/check_subordinates', methods=['GET'])
 def check_subordinates():
     result = db.session.execute("SELECT * FROM Employee;")
     employees = result.fetchall()
     return render_template('subordinates.html', employees=employees)
 
-@app.route('/manager/click_subordinate/<int:ssn>')
+@manager_blueprint.route('/manager/click_subordinate/<int:ssn>')
 def click_subordinate(ssn):
     result = db.session.execute("""
         SELECT Bike.Serial_num, Location.Name
@@ -20,5 +24,4 @@ def click_subordinate(ssn):
     employees = result.fetchall()
     return render_template('click_subordinate.html', employees=employees)
 
-if __name__ == "__main__":
-    app.run()
+
