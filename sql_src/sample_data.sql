@@ -1,3 +1,4 @@
+
 -- INSERT INTO Employee (Ssn, Name, Sex) VALUES (123, 'John', 'male');
 INSERT INTO
     Employee
@@ -146,3 +147,4 @@ INSERT INTO Rent_History VALUES ('Shilin Night Market', 'Longshan Temple', 281, 
 INSERT INTO Rent_History VALUES ('Beitou Hot Springs', 'Shilin Night Market', 947, 1007, 8, 45, 50);
 INSERT INTO Rent_History VALUES ('Keelung Night Market', 'Beitou Hot Springs', 204, 1008, 9, 40, 35);
 INSERT INTO Rent_History VALUES ('Yehliu Geopark', 'Keelung Night Market', 11, 1009, 10, 65, 70);
+
