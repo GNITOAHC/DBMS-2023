@@ -6,7 +6,6 @@ from database import db
 
 
 from manager_route import manager_blueprint
-
 from user import user_blueprint
 from api import api_blueprint
 
@@ -36,6 +35,7 @@ def index():
 # register blueprint
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(api_blueprint, url_prefix='/api')
+app.register_blueprint(manager_blueprint, url_prefix='/manager')
 
 # # error handler 404
 # @app.errorhandler(404)
