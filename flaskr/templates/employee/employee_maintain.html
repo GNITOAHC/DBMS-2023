@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Maintain</title>
+  </head>
+  <body>
+    <h1>Employee Maintenance Panel</h1>
+    <a href="/employee/employee_root">Employee Home</a>
+
+    <h2>Bike list</h2>
+    {% for r in result %} 
+    {% if r.Is_using == true %} {% set use_status = "In Use" %} {% else %} {% set use_status = "Not In Use" %} {% endif %}
+    <p>
+      <span
+        >Serial:
+        <a href="{{url_for('employee.employee_maintain_serial', bike_serial=r.Serial_num, **request.args)}}"
+          >{{r.Serial_num}}</a
+        >
+      </span>
+          <span>{{use_status}}</span>
+    </p>
+    {% endfor %}
+    <a href="/employee?emp_id={{emp_id}}">Back</a>
+  </body>
+</html>
