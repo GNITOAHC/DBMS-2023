@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subordinates</title> 
+</head>
+<body>
+    <h1>Employee List</h1>
+    <table>
+        <tr>
+            <th>Ssn</th>
+            <th>Name</th>
+            <th>Sex</th>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+            <td><a href="{{ url_for('click_subordinate', ssn=employee.Ssn) }}">{{ employee[0] }}</a></td>
+            <td>{{ employee[1] }}</td>
+            <td>{{ employee[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
