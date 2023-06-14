@@ -12,8 +12,8 @@
         </tr>
         {% for employee in employees %}
         <tr>
-            <td>{{ employee[0] }}</td>
-            <td>{{ employee[1] }}</td>
+            <td>{{ employee['Serial_num'] }}</td>
+            <td>{{ employee['Name'] }}</td>
         </tr>
         {% endfor %}
     </table> 

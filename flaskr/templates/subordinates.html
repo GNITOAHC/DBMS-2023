@@ -13,9 +13,9 @@
         </tr>
         {% for employee in employees %}
         <tr>
-            <td><a href="{{ url_for('click_subordinate', ssn=employee.Ssn) }}">{{ employee[0] }}</a></td>
-            <td>{{ employee[1] }}</td>
-            <td>{{ employee[2] }}</td>
+            <td><a href="{{ url_for('manager.click_subordinate', ssn=employee.Ssn) }}">{{ employee['Ssn'] }}</a></td>
+            <td>{{ employee["Name"] }}</td>
+            <td>{{ employee['Sex'] }}</td>
         </tr>
         {% endfor %}
     </table>
