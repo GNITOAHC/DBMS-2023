@@ -1,26 +1,21 @@
 {% extends "base.html" %} {% block body %}
-<head>
-  <title>Subordinates</title>
-</head>
-<body>
-  <h1>Employee List</h1>
-  <table>
-    <tr>
-      <th>Ssn</th>
-      <th>Name</th>
-      <th>Sex</th>
-    </tr>
-    {% for employee in employees %}
-    <tr>
-      <td>
-        <a href="{{ url_for('manager.click_subordinate', ssn=employee.Ssn) }}"
-          >{{ employee['Ssn'] }}</a
-        >
-      </td>
-      <td>{{ employee["Name"] }}</td>
-      <td>{{ employee['Sex'] }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</body>
+<h1>Employee List</h1>
+<table>
+  <tr>
+    <th>Ssn</th>
+    <th>Name</th>
+    <th>Sex</th>
+  </tr>
+  {% for employee in employees %}
+  <tr>
+    <td>
+      <a href="{{ url_for('manager.click_subordinate', ssn=employee.Ssn) }}"
+        >{{ employee['Ssn'] }}</a
+      >
+    </td>
+    <td>{{ employee["Name"] }}</td>
+    <td>{{ employee['Sex'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
 {% endblock %}

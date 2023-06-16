@@ -1,23 +1,17 @@
 {% extends "base.html" %} {% block body %}
-<head>
-  <meta charset="UTF-8" />
-  <title>Employee root</title>
-  <style>
-    a {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <h1>Employee</h1>
-  <form action="/employee" method="get">
-    <div>
-      <label for="employee_ssn"> Ssn: </label>
-      <input id="employee_ssn" type="text" name="emp_id" />
-    </div>
-    <div class="button">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </form>
-</body>
+<style>
+  a {
+    display: block;
+  }
+</style>
+<h1>Employee</h1>
+<form action="/employee" method="get">
+  <div>
+    <label for="employee_ssn"> Ssn: </label>
+    <input id="employee_ssn" type="text" name="emp_id" />
+  </div>
+  <div class="button">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
 {% endblock %}

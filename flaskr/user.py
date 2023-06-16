@@ -1,13 +1,27 @@
-from flask import Blueprint, render_template, jsonify, request, abort, url_for, redirect
+from flask import (
+    Blueprint,
+    render_template,
+    jsonify,
+    request,
+    abort,
+    url_for,
+    redirect,
+    flash,
+)
 from database import db
 
 
 user_blueprint = Blueprint("user", __name__, template_folder="templates")
 
 
+@user_blueprint.route("/user_root")
+def user_root():
+    return render_template("user/user_root.html")
+
+
 # homepage for user
 @user_blueprint.route("/")
-def user_root():
+def user_id():
     # get cardId from request arguments
     card_id = request.args.get("card_id")
     if card_id is None:
@@ -26,7 +40,7 @@ def user_root():
         abort(404, "User not found")
     cursor.close()
 
-    return render_template("user/user_root.html", user=user)
+    return render_template("user/user.html", user=user)
 
 
 # user profile page
@@ -123,11 +137,13 @@ def user_rent():
         """
         )
         user = cursor.fetchone()
+        cursor.execute(f"""SELECT * FROM Bike WHERE Is_broken=0 AND Is_using=0;""")
+        bikes = cursor.fetchall()
         if user is None:
             abort(404, "User not found")
         cursor.close()
-
-        return render_template("user/user_rent.html", user=user)
+        flash("Success")
+        return render_template("user/user_rent.html", user=user, bikes=bikes)
 
 
 # FROM HERE

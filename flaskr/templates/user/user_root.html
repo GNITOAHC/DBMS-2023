@@ -1,21 +1,17 @@
 {% extends "base.html" %} {% block body %}
-<head>
-  <meta charset="UTF-8" />
-  <title>user root</title>
-  <style>
-    a {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <h1>User</h1>
-  <p>Name: {{user.Name}}</p>
-  <p>CardId: {{request.args.get("card_id")}}</p>
-  <a href="{{url_for('user.user_profile', **request.args)}}">Profile</a>
-  <a href="{{url_for('user.user_history', **request.args)}}">History</a>
-  <a href="{{url_for('user.user_rent', **request.args)}}">Rent bike</a>
-  <a href="{{url_for('user.user_return', **request.args)}}">Return bike</a>
-  <a href="{{url_for('user.user_list', **request.args)}}">List bikes</a>
-</body>
+<style>
+  a {
+    display: block;
+  }
+</style>
+<h1>User</h1>
+<form action="/user" method="get">
+  <div>
+    <label for="card_id"> Card id: </label>
+    <input id="card_id" type="text" name="card_id" />
+  </div>
+  <div class="button">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
 {% endblock %}

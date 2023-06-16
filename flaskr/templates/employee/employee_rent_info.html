@@ -1,37 +1,31 @@
 {% extends "base.html" %} {% block body %}
-<head>
-  <meta charset="UTF-8" />
-  <title>Employee Check Rent History</title>
-</head>
-<body>
-  <h1>Rent History</h1>
-  <a href="/employee/employee_root">Employee Home</a>
-  <form action="/employee/rentInfo" method="get">
-    <div>
-      <label for="rent_serial"> Rent serial: </label>
-      <input
-        type="hidden"
-        name="emp_id"
-        value="{{ request.args.get('emp_id') }}"
-      />
-      <input id="rent_serial" type="text" name="rent_serial" />
-    </div>
-    <div class="button">
-      <button type="submit" class="btn btn-primary">Search rent info</button>
-    </div>
-  </form>
-  {% if row == 0 %}
-  <p>No data found.</p>
-  {% else %}
-  <p>Rent serial: {{request.args.get("rent_serial")}}</p>
-  {% for info in r %}
-  <p>User cardID: {{info.User_cardID}}</p>
-  <p>
-    Bike serial: {{info.Bike_serial}}, Start location: {{info.Start_loc}}, Stop
-    location:{{info.Stop_loc}}, Cost: {{info.Cost}}, Time: {{info.Time}}
-  </p>
-  {% endfor %} {% endif %}
+<h1>Rent History</h1>
+<a href="/employee/employee_root">Employee Home</a>
+<form action="/employee/rentInfo" method="get">
+  <div>
+    <label for="rent_serial"> Rent serial: </label>
+    <input
+      type="hidden"
+      name="emp_id"
+      value="{{ request.args.get('emp_id') }}"
+    />
+    <input id="rent_serial" type="text" name="rent_serial" />
+  </div>
+  <div class="button">
+    <button type="submit" class="btn btn-primary">Search rent info</button>
+  </div>
+</form>
+{% if row == 0 %}
+<p>No data found.</p>
+{% else %}
+<p>Rent serial: {{request.args.get("rent_serial")}}</p>
+{% for info in r %}
+<p>User cardID: {{info.User_cardID}}</p>
+<p>
+  Bike serial: {{info.Bike_serial}}, Start location: {{info.Start_loc}}, Stop
+  location:{{info.Stop_loc}}, Cost: {{info.Cost}}, Time: {{info.Time}}
+</p>
+{% endfor %} {% endif %}
 
-  <a href="/employee?emp_id={{emp_id}}">Back</a>
-</body>
+<a href="/employee?emp_id={{emp_id}}">Back</a>
 {% endblock %}

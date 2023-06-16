@@ -1,47 +1,23 @@
 {% extends "base.html" %} {% block body %}
+<h1>User return</h1>
+<p>Name: {{user.Name}}</p>
+<p>CardId: {{request.args.get("card_id")}}</p>
+<p>Renting: {{user.Rent_bike_serial}}</p>
 
-<head>
-  <meta charset="UTF-8" />
-  <title>user return</title>
-</head>
-
-<body>
-  <h1>User return</h1>
-  <p>Name: {{user.Name}}</p>
-  <p>CardId: {{request.args.get("card_id")}}</p>
-  <p>Renting: {{user.Rent_bike_serial}}</p>
-
-  <form action="#" method="post">
-    <div class="form-group">
-      <label for="is_broken">Is the bike broken:</label>
-      <input
-        id="is_broken"
-        class="form-control"
-        type="text"
-        placeholder="y/n"
-        name="ibf"
-      />
-    </div>
-    <br />
-    <div class="form-group">
-      <label for="parking_at">Parking at:</label>
-      <input
-        id="parking_at"
-        class="form-control"
-        type="text"
-        placeholder="enter a location"
-        name="plf"
-      />
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </form>
-  <br />
-  <h3>Avalible stops</h3>
-  {% set index = 1 %} {% for stop in stops %}
-  <p>{{index}}. {{stop.Name}}</p>
-  {% set index= index + 1 %} {% endfor %}
-</body>
-
-{% endblock %}
+<form action="#" method="post">
+  <div class="form-group">
+    <label for="is_broken">Is the bike broken:</label>
+    <select class="form-control" name="ibf">
+      <option value="y">Yes</option>
+      <option value="n" selected>No</option>
+    </select>
+    <label for="parking_at">Parking at:</label>
+    <select class="form-control" name="plf">
+      {% for stop in stops %}
+      <option value="{{stop.Name}}">{{stop.Name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endfor %} {% endblock %}
