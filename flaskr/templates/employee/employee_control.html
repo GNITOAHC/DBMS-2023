@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Employee profile</title>
-  </head>
-  <body>
-    <h1>Employee Profile</h1>
-    <a href="/employee/employee_root">Employee Home</a>
+{% extends "base.html" %} {% block body %}
+<head>
+  <meta charset="UTF-8" />
+  <title>Employee profile</title>
+</head>
+<body>
+  <h1>Employee Profile</h1>
+  <a href="/employee/employee_root">Employee Home</a>
 
-    <h2>Control locations</h2>
-    {% for r in result %}
-    <h3>{{r.Name}} :</h3>
-    <p>Street: {{r.Street}}, District: {{r.District}}, City: {{r.City}}</p>
-    {% endfor %}
-    <a href="/employee?emp_id={{emp_id}}">Back</a>
-  </body>
-</html>
+  <h2>Control locations</h2>
+  {% for r in result %}
+  <h3>{{r.Name}} :</h3>
+  <p>Street: {{r.Street}}, District: {{r.District}}, City: {{r.City}}</p>
+  {% endfor %}
+  <a href="/employee?emp_id={{emp_id}}">Back</a>
+</body>
+{% endblock %}

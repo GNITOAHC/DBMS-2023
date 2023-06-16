@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %} {% block body %}
 
 <head>
   <meta charset="UTF-8" />
@@ -14,10 +13,9 @@
   <h3>Location: {{bikes[0].Park_loc}}</h3>
   {% set index = 1 %} {% for bike in bikes%}
   <p>
-    {{index}}. Serial number: {{bike.Serial_num}}, Is broken:
-    {{bike.Is_broken}}
+    {{index}}. Serial number: {{bike.Serial_num}}, Is broken: {{bike.Is_broken}}
   </p>
   {% set index= index + 1 %} {% endfor %}
 </body>
 
-</html>
+{% endblock %}

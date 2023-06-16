@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %} {% block body %}
 
 <head>
   <meta charset="UTF-8" />
@@ -15,12 +14,24 @@
   <form action="#" method="post">
     <div class="form-group">
       <label for="is_broken">Is the bike broken:</label>
-      <input id="is_broken" class="form-control" type="text" placeholder="y/n" name="ibf" />
+      <input
+        id="is_broken"
+        class="form-control"
+        type="text"
+        placeholder="y/n"
+        name="ibf"
+      />
     </div>
     <br />
     <div class="form-group">
       <label for="parking_at">Parking at:</label>
-      <input id="parking_at" class="form-control" type="text" placeholder="enter a location" name="plf" />
+      <input
+        id="parking_at"
+        class="form-control"
+        type="text"
+        placeholder="enter a location"
+        name="plf"
+      />
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -33,4 +44,4 @@
   {% set index= index + 1 %} {% endfor %}
 </body>
 
-</html>
+{% endblock %}
