@@ -59,7 +59,36 @@ LOCK TABLES `Bike` WRITE;
 /*!40000 ALTER TABLE `Bike` DISABLE KEYS */
 ;
 INSERT INTO `Bike`
-VALUES (456, 'Giant', 0, 0, 0, 123, 'SY');
+VALUES (7, 'Giant', 0, 0, 0, 9, 'Keelung Night Market'),
+(11, 'Scott', 0, 1, 0, 9, 'Keelung Night Market'),
+(48, 'Cannondale', 0, 0, 0, 8, 'Beitou Hot Springs'),
+(67, 'Trek', 0, 0, 0, 9, 'Keelung Night Market'),
+(123, 'Merida', 0, 0, 0, 1, 'SY'),
+(125, 'Scott', 0, 0, 0, 2, 'Taipei 101'),
+(129, 'Trek', 0, 0, 0, 6, 'Longshan Temple'),
+(151, 'Cannondale', 0, 0, 0, 3, 'NTU'),
+(182, 'Raleigh', 0, 0, 0, 4, 'Gongguan'),
+(204, 'Diamondback', 0, 1, 0, 8, 'Beitou Hot Springs'),
+(208, 'Bianchi', 1, 0, 0, 10, 'Yehliu Geopark'),
+(214, 'Giant', 0, 1, 0, 2, 'Taipei 101'),
+(215, 'Specialized', 0, 0, 0, 5, 'Ximending'),
+(281, 'Scott', 0, 1, 0, 6, 'Longshan Temple'),
+(346, 'Trek', 1, 0, 0, 2, 'Taipei 101'),
+(392, 'Bianchi', 0, 0, 0, 7, 'Shilin Night Market'),
+(403, 'Raleigh', 0, 0, 0, 7, 'Shilin Night Market'),
+(405, 'Cannondale', 0, 0, 0, 5, 'Ximending'),
+(408, 'Raleigh', 1, 0, 0, 10, 'Yehliu Geopark'),
+(456, 'Trek', 0, 1, 0, 1, 'SY'),
+(457, 'Scott', 0, 0, 0, 3, 'NTU'),
+(478, 'Fuji', 0, 0, 0, 4, 'Gongguan'),
+(503, 'Diamondback', 0, 1, 0, 5, 'Ximending'),
+(529, 'Giant', 1, 0, 0, 6, 'Longshan Temple'),
+(753, 'Specialized', 0, 1, 0, 3, 'NTU'),
+(789, 'Giant', 0, 0, 0, 1, 'SY'),
+(938, 'Fuji', 0, 1, 0, 10, 'Yehliu Geopark'),
+(947, 'Fuji', 0, 1, 0, 7, 'Shilin Night Market'),
+(958, 'Bianchi', 0, 1, 0, 4, 'Gongguan'),
+(959, 'Specialized', 0, 0, 0, 8, 'Beitou Hot Springs');
 /*!40000 ALTER TABLE `Bike` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -88,7 +117,16 @@ LOCK TABLES `Employee` WRITE;
 /*!40000 ALTER TABLE `Employee` DISABLE KEYS */
 ;
 INSERT INTO `Employee`
-VALUES (123, 'John', 'male');
+VALUES (1, 'John', 'male'),
+(2, 'Emily', 'female'),
+(3, 'Sarah', 'female'),
+(4, 'Michael', 'male'),
+(5, 'Jessica', 'female'),
+(6, 'David', 'male'),
+(7, 'Jennifer', 'female'),
+(8, 'Daniel', 'male'),
+(9, 'Michelle', 'female'),
+(10, 'Andrew', 'male');
 /*!40000 ALTER TABLE `Employee` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -118,7 +156,16 @@ LOCK TABLES `Ensurance` WRITE;
 /*!40000 ALTER TABLE `Ensurance` DISABLE KEYS */
 ;
 INSERT INTO `Ensurance`
-VALUES (789, 1, 100);
+VALUES (1000, 1, 78000),
+(1001, 1, 325000),
+(1002, 1, 520000),
+(1003, 1, 147000),
+(1004, 1, 624000),
+(1005, 1, 255000),
+(1006, 1, 862000),
+(1007, 1, 42000),
+(1008, 1, 96000),
+(1009, 1, 710000);
 /*!40000 ALTER TABLE `Ensurance` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -151,8 +198,16 @@ LOCK TABLES `Location` WRITE;
 /*!40000 ALTER TABLE `Location` DISABLE KEYS */
 ;
 INSERT INTO `Location`
-VALUES ('SY', 'ShengYang', 'Xinyi', 'TPE', 123),
-('Taipei 101', 'Shifu', 'Xinyi', 'TPE', 123);
+VALUES ('Beitou Hot Springs', 'Guizhou', 'Beitou', 'TPE', 8),
+('Gongguan', 'Xinhai', 'Daan', 'TPE', 4),
+('Keelung Night Market', 'Ren 2nd', 'Renai', 'KEE', 9),
+('Longshan Temple', 'Guangzhou', 'Wanhua', 'TPE', 6),
+('NTU', 'Roosevelt', 'Daan', 'TPE', 3),
+('Shilin Night Market', 'Danjin', 'Shilin', 'TPE', 7),
+('SY', 'ShengYang', 'Xinyi', 'TPE', 1),
+('Taipei 101', 'Shifu', 'Xinyi', 'TPE', 2),
+('Ximending', 'Wuchang', 'Wanhua', 'TPE', 5),
+('Yehliu Geopark', 'Gangdong', 'Wanli', 'KEE', 10);
 /*!40000 ALTER TABLE `Location` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -198,7 +253,48 @@ LOCK TABLES `Rent_history` WRITE;
 /*!40000 ALTER TABLE `Rent_history` DISABLE KEYS */
 ;
 INSERT INTO `Rent_history`
-VALUES ('SY', 'Taipei 101', 456, 789, 111, 50, 60);
+VALUES (
+        'Beitou Hot Springs',
+        'Shilin Night Market',
+        947,
+        1007,
+        8,
+        45,
+        50
+    ),
+('Gongguan', 'NTU', 151, 1003, 4, 30, 25),
+(
+        'Keelung Night Market',
+        'Beitou Hot Springs',
+        204,
+        1008,
+        9,
+        40,
+        35
+    ),
+('Longshan Temple', 'Ximending', 503, 1005, 6, 35, 30),
+('NTU', 'Taipei 101', 214, 1002, 3, 55, 75),
+(
+        'Shilin Night Market',
+        'Longshan Temple',
+        281,
+        1006,
+        7,
+        60,
+        55
+    ),
+('SY', 'Taipei 101', 125, 1000, 1, 50, 60),
+('Taipei 101', 'SY', 789, 1001, 2, 40, 45),
+('Ximending', 'Gongguan', 478, 1004, 5, 25, 20),
+(
+        'Yehliu Geopark',
+        'Keelung Night Market',
+        11,
+        1009,
+        10,
+        65,
+        70
+    );
 /*!40000 ALTER TABLE `Rent_history` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -229,7 +325,16 @@ LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */
 ;
 INSERT INTO `User`
-VALUES (789, 'Alice', NULL);
+VALUES (1000, 'Alice', 456),
+(1001, 'Bob', 214),
+(1002, 'Charlie', 753),
+(1003, 'David', 958),
+(1004, 'Eve', 503),
+(1005, 'Frank', 281),
+(1006, 'Grace', 947),
+(1007, 'Henry', 204),
+(1008, 'Ivy', 11),
+(1009, 'Jack', 938);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */
 ;
 UNLOCK TABLES;
@@ -249,4 +354,4 @@ UNLOCK TABLES;
 ;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */
 ;
--- Dump completed on 2023-05-17 15:33:38
+-- Dump completed on 2023-06-16 12:31:09
