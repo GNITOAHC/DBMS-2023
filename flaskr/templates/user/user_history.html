@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block body %}
+<h1>User History</h1>
+<p>Name: {{user.Name}}</p>
+<p>CardId: {{request.args.get("card_id")}}</p>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Start location</th>
+      <th>Stop location</th>
+      <th>Cost</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for history in histories %}
+    <tr>
+      <td>{{ history.Start_loc }}</td>
+      <td>{{ history.Stop_loc }}</td>
+      <td>{{ history.Cost }}</td>
+      <td>{{ history.Time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

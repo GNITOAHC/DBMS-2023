@@ -1,37 +1,49 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Employee Check Rent History</title>
-  </head>
-  <body>
-    <h1>Rent History</h1>
-    <a href="/employee/employee_root">Employee Home</a>
-    <form action="/employee/rentInfo" method="get">
-      <div>
-        <label for="rent_serial"> Rent serial: </label>
-        <input type="hidden" name="emp_id" value="{{ request.args.get('emp_id') }}">
-        <input id="rent_serial" type="text" name="rent_serial" />
-      </div>
-      <div class="button">
-        <button type="submit" class="btn btn-primary">Search rent info</button>
-      </div>
-    </form>
-    {% if row == 0 %}
-    <p>No data found.</p>
-    {% else %}
-    <p>Rent serial: {{request.args.get("rent_serial")}}</p>
-    {% for info in r %}
-    <p>User cardID: {{info.User_cardID}}</p>
-    <p>Bike serial: {{info.Bike_serial}},
-      Start location: {{info.Start_loc}},
-      Stop location:{{info.Stop_loc}},
-      Cost: {{info.Cost}},
-      Time: {{info.Time}}
-    </p>
+{% extends "base.html" %} {% block body %}
+<h1>Rent History</h1>
+<a href="/employee/employee_root">Employee Home</a>
+<form action="/employee/rentInfo" method="get">
+  <div>
+    <label for="rent_serial"> Rent serial: </label>
+    <input
+      type="hidden"
+      name="emp_id"
+      value="{{ request.args.get('emp_id') }}"
+    />
+    <input id="rent_serial" type="text" name="rent_serial" />
+  </div>
+  <div class="button">
+    <button type="submit" class="btn btn-primary">Search rent info</button>
+  </div>
+</form>
+{% if row == 0 %}
+<p>No data found.</p>
+{% else %}
+<p>Rent serial: {{request.args.get("rent_serial")}}</p>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>User card id</th>
+      <th>Bike serial</th>
+      <th>Start location</th>
+      <th>Stop location</th>
+      <th>Cost</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for history in r %}
+    <tr>
+      <td>{{ history.User_cardID }}</td>
+      <td>{{ history.Bike_serial }}</td>
+      <td>{{ history.Start_loc }}</td>
+      <td>{{ history.Stop_loc }}</td>
+      <td>{{ history.Cost }}</td>
+      <td>{{ history.Time }}</td>
+    </tr>
     {% endfor %}
-    {% endif %}
+  </tbody>
+</table>
+{% endif %}
 
-    <a href="/employee?emp_id={{emp_id}}">Back</a>
-  </body>
-</html>
+<a href="/employee?emp_id={{emp_id}}">Back</a>
+{% endblock %}

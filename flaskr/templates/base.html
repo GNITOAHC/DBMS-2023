@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{site_name}}</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <body>
+      <div id="topheader">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="/"> Youbike</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="home">
+            <ul class="navbar-nav navbar-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="{{url_for('user.user_root')}}"
+                  >User</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  href="{{url_for('employee.employee_root')}}"
+                >
+                  Employee
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link"
+                  href="{{url_for('manager.check_subordinates')}}"
+                >
+                  Manager
+                </a>
+              </li>
+            </ul>
+          </div>
+          <img 
+            src="data:image/png;base64,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"
+            height="50"/>
+        </nav>
+      </div>
+      <div class="container">{% block body %} {% endblock %}</div>
+
+      <script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        $("#topheader .navbar-nav a").on("click", function () {
+          $("#topheader .navbar-nav").find("li.active").removeClass("active");
+          $(this).parent("li").addClass("active");
+        });
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+</html>

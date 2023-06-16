@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block body %}
+<style>
+  a {
+    display: block;
+  }
+</style>
+<h1>User</h1>
+<p>Name: {{user.Name}}</p>
+<p>Card Id: {{request.args.get("card_id")}}</p>
+<a href="{{url_for('user.user_profile', **request.args)}}">Profile</a>
+<a href="{{url_for('user.user_history', **request.args)}}">History</a>
+<a href="{{url_for('user.user_rent', **request.args)}}">Rent bike</a>
+<a href="{{url_for('user.user_return', **request.args)}}">Return bike</a>
+<a href="{{url_for('user.user_list', **request.args)}}">List bikes</a>
+{% endblock %}

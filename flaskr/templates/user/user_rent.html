@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block body %}
+<h1>User rent</h1>
+<p>Name: {{user.Name}}</p>
+<p>CardId: {{request.args.get("card_id")}}</p>
+
+<form action="#" method="post">
+  <div class="form-group">
+    <label for="bike_serial">Bike serial:</label>
+    <select class="form-control" name="bsf">
+      {% for bike in bikes %}
+      <option value="{{bike.Serial_num}}">
+        {{bike.Serial_num}} at {{bike.Park_loc}}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
