@@ -1,26 +1,18 @@
 {% extends "base.html" %} {% block body %}
 
-<h1>User list</h1>
+<h1>List bikes</h1>
 <p>Name: {{user.Name}}</p>
 <p>CardId: {{request.args.get("card_id")}}</p>
 
 <form action="#" method="post">
   <div class="form-group">
     <label for="location">Location:</label>
-    <input
-      id="location"
-      class="form-control"
-      type="text"
-      placeholder="enter a location"
-      name="lf"
-    />
+    <select class="form-control" name="lf">
+      {% for stop in stops %}
+      <option value="{{stop.Name}}">{{stop.Name}}</option>
+      {% endfor %}
+    </select>
   </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-<br />
-<h3>Avalible stops</h3>
-{% set index = 1 %} {% for stop in stops %}
-<p>{{index}}. {{stop.Name}}</p>
-{% set index= index + 1 %} {% endfor %} {% endblock %}
+{% endblock %}

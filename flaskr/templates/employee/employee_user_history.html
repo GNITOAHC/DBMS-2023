@@ -19,12 +19,27 @@
 <p>No data found.</p>
 {% else %}
 <p>CardId: {{request.args.get("card_id")}}</p>
-{% for history in r %}
-<p>
-  Start location: {{history.Start_loc}}, Stop location:{{history.Stop_loc}},
-  Cost: {{history.Cost}}, Time: {{history.Time}}
-</p>
-{% endfor %} {% endif %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Start location</th>
+      <th>Stop location</th>
+      <th>Cost</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for history in r %}
+    <tr>
+      <td>{{ history.Start_loc }}</td>
+      <td>{{ history.Stop_loc }}</td>
+      <td>{{ history.Cost }}</td>
+      <td>{{ history.Time }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 
 <a href="/employee?emp_id={{emp_id}}">Back</a>
 {% endblock %}

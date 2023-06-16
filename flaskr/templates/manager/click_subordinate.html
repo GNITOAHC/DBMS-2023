@@ -1,15 +1,19 @@
 {% extends "base.html" %} {% block body %}
 <h1>Subordinate Details</h1>
-<table>
-  <tr>
-    <th>Bike_Ssn</th>
-    <th>Location_Name</th>
-  </tr>
-  {% for employee in employees %}
-  <tr>
-    <td>{{ employee['Serial_num'] }}</td>
-    <td>{{ employee['Name'] }}</td>
-  </tr>
-  {% endfor %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Bike_Ssn</th>
+      <th>Location_Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+      <td>{{ employee['Serial_num'] }}</td>
+      <td>{{ employee['Name'] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% endblock %}

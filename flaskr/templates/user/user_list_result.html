@@ -1,11 +1,24 @@
 {% extends "base.html" %} {% block body %}
-<h1>User list</h1>
+<h1>List bikes</h1>
 <p>Name: {{user.Name}}</p>
 <p>CardId: {{request.args.get("card_id")}}</p>
 
 <h3>Location: {{bikes[0].Park_loc}}</h3>
-{% set index = 1 %} {% for bike in bikes%}
-<p>
-  {{index}}. Serial number: {{bike.Serial_num}}, Is broken: {{bike.Is_broken}}
-</p>
-{% set index= index + 1 %} {% endfor %} {% endblock %}
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Serial number</th>
+      <th>Is broken</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for bike in bikes %}
+    <tr>
+      <td>{{ bike.Serial_num }}</td>
+      <td>{{ bike.Is_broken}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
