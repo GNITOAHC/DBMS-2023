@@ -5,7 +5,7 @@ import os
 from database import db
 
 
-from manager_route import manager_blueprint
+from manager import manager_blueprint
 from user import user_blueprint
 from api import api_blueprint
 from employee import employee
@@ -13,31 +13,33 @@ from employee import employee
 
 app = Flask(
     __name__,
-    static_url_path='/python',
-    static_folder='static',
-    template_folder='templates'
+    static_url_path="/python",
+    static_folder="static",
+    template_folder="templates",
 )
 load_dotenv()
 
-app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
-app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['MYSQL_DB'] = 'Youbike'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config["MYSQL_HOST"] = os.getenv("MYSQL_HOST")
+app.config["MYSQL_USER"] = os.getenv("MYSQL_USER")
+app.config["MYSQL_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config["MYSQL_DB"] = "Youbike"
+app.config["MYSQL_CURSORCLASS"] = "DictCursor"
 
 db.init_app(app)
+
 
 # root
 @app.route("/")
 def index():
-    return "Youbike"
+    return render_template("homepage.html")
+
 
 # register blueprint
-app.register_blueprint(user_blueprint, url_prefix='/user')
-app.register_blueprint(api_blueprint, url_prefix='/api')
-app.register_blueprint(employee, url_prefix='/employee')
-app.register_blueprint(manager_blueprint, url_prefix='/manager')
+app.register_blueprint(user_blueprint, url_prefix="/user")
+app.register_blueprint(api_blueprint, url_prefix="/api")
+app.register_blueprint(employee, url_prefix="/employee")
+app.register_blueprint(manager_blueprint, url_prefix="/manager")
 
 
 # # error handler 404
@@ -68,6 +70,5 @@ app.register_blueprint(manager_blueprint, url_prefix='/manager')
 #     return render_template("500.html"), 500
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
-

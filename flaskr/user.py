@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, jsonify, request, abort, url_for, 
 from database import db
 
 
-user_blueprint = Blueprint('user', __name__, template_folder='templates')
+user_blueprint = Blueprint("user", __name__, template_folder="templates")
+
 
 # homepage for user
 @user_blueprint.route("/")
@@ -11,19 +12,21 @@ def user_root():
     card_id = request.args.get("card_id")
     if card_id is None:
         abort(400, "Parameter not found")
-        
+
     # query data from db
     cursor = db.connection.cursor()
-    cursor.execute(f'''
+    cursor.execute(
+        f"""
         SELECT * FROM User
         WHERE CardID = {card_id};
-    ''')
+    """
+    )
     user = cursor.fetchone()
     if user is None:
         abort(404, "User not found")
     cursor.close()
 
-    return render_template("user_root.html", user=user)
+    return render_template("user/user_root.html", user=user)
 
 
 # user profile page
@@ -38,22 +41,26 @@ def user_profile():
     cursor = db.connection.cursor()
 
     # query user data
-    cursor.execute(f'''
+    cursor.execute(
+        f"""
         SELECT * FROM User
         WHERE CardID = {card_id};
-    ''')
+    """
+    )
     user = cursor.fetchone()
     if user is None:
         abort(404, "User not found")
 
     # query user's ensurance data
-    cursor.execute(f'''
+    cursor.execute(
+        f"""
         SELECT * FROM Ensurance
         WHERE CardID = {card_id};
-    ''')
+    """
+    )
     ensures = cursor.fetchall()
 
-    return render_template("user_profile.html", user=user, ensures=ensures)
+    return render_template("user/user_profile.html", user=user, ensures=ensures)
 
 
 # user history page
@@ -68,23 +75,27 @@ def user_history():
     cursor = db.connection.cursor()
 
     # query user data
-    cursor.execute(f'''
+    cursor.execute(
+        f"""
         SELECT * FROM User
         WHERE CardID = {card_id};
-    ''')
+    """
+    )
     user = cursor.fetchone()
     if user is None:
         abort(404, "User not found")
 
     # query user's rent_history data
-    cursor.execute(f'''
+    cursor.execute(
+        f"""
         SELECT * FROM Rent_history
         WHERE User_cardID = {card_id};
-    ''')
+    """
+    )
     histories = cursor.fetchall()
     cursor.close()
 
-    return render_template("user_history.html", user=user, histories=histories)
+    return render_template("user/user_history.html", user=user, histories=histories)
 
 
 # get and post the renting info
@@ -105,16 +116,19 @@ def user_rent():
     else:
         # query data from db
         cursor = db.connection.cursor()
-        cursor.execute(f'''
+        cursor.execute(
+            f"""
             SELECT * FROM User
             WHERE CardID = {card_id};
-        ''')
+        """
+        )
         user = cursor.fetchone()
         if user is None:
             abort(404, "User not found")
         cursor.close()
 
-        return render_template("user_rent.html", user=user)
+        return render_template("user/user_rent.html", user=user)
+
 
 # FROM HERE
 # get and post the returning info
@@ -141,21 +155,26 @@ def user_return():
     else:
         # query data from db
         cursor = db.connection.cursor()
-        cursor.execute(f'''
+        cursor.execute(
+            f"""
             SELECT * FROM User
             WHERE CardID = {card_id};
-        ''')
+        """
+        )
         user = cursor.fetchone()
         if user is None:
             abort(404, "User not found")
-        
-        cursor.execute(f'''
+
+        cursor.execute(
+            f"""
             SELECT Name FROM Location;
-        ''')
+        """
+        )
         stops = cursor.fetchall()
         cursor.close()
 
-        return render_template("user_return.html", user=user, stops=stops)
+        return render_template("user/user_return.html", user=user, stops=stops)
+
 
 # renting api
 @user_blueprint.route("/list", methods=["POST", "GET"])
@@ -168,23 +187,29 @@ def user_list():
     # post: redirect to renting api
     if request.method == "POST":
         input_loc = request.form["lf"]
-        return redirect(url_for("api.user_list_api", card_id=card_id, input_loc=input_loc))
+        return redirect(
+            url_for("api.user_list_api", card_id=card_id, input_loc=input_loc)
+        )
     # get: generate the form to gather the renting info
     else:
         # query data from db
         cursor = db.connection.cursor()
-        cursor.execute(f'''
+        cursor.execute(
+            f"""
             SELECT * FROM User
             WHERE CardID = {card_id};
-        ''')
+        """
+        )
         user = cursor.fetchone()
         if user is None:
             abort(404, "User not found")
-        
-        cursor.execute(f'''
+
+        cursor.execute(
+            f"""
             SELECT Name FROM Location;
-        ''')
+        """
+        )
         stops = cursor.fetchall()
         cursor.close()
 
-        return render_template("user_list_form.html", user=user, stops=stops)
+        return render_template("user/user_list_form.html", user=user, stops=stops)
