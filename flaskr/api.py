@@ -53,22 +53,22 @@ def user_rent_api():
         abort(404, "Bike is not avalible")
 
     # update db data
-    cursor.execute(
-        f"""
-        UPDATE Bike
-        SET Is_using = 1
-        WHERE Serial_num = {bike_serial};
-    """
-    )
-    db.connection.commit()
-    cursor.execute(
-        f"""
-        UPDATE User
-        SET Rent_bike_serial = {bike_serial}
-        WHERE CardID = {card_id};
-    """
-    )
-    db.connection.commit()
+    try:
+        cursor.execute("START TRANSACTION")
+        cursor.execute(f'''
+            UPDATE Bike
+            SET Is_using = 1
+            WHERE Serial_num = {bike_serial}
+        ''')
+        cursor.execute(f'''
+            UPDATE User
+            SET Rent_bike_serial = {bike_serial}
+            WHERE CardID = {card_id}
+        ''')
+        cursor.execute("COMMIT")
+    except:
+        cursor.execute("ROLLBACK")
+        abort(500, "Error, please try again")
 
     # redirct to user homepage
     return redirect(url_for("user.user_id", card_id=card_id))
@@ -137,50 +137,46 @@ def user_return_api():
     start_loc = bike["Park_loc"]  # location that the cat is rented
 
     # update db data
-    cursor.execute(
-        f"""
-        UPDATE User
-        SET Rent_bike_serial = NULL
-        WHERE CardID = {card_id};
-    """
-    )
-    db.connection.commit()
-    cursor.execute(
-        f"""
-        UPDATE Bike
-        SET 
-            Is_using = 0, 
-            Is_broken = {1 if is_broken else 0},
-            Park_loc = '{park_loc}'
-        WHERE Serial_num = {user['Rent_bike_serial']};
-    """
-    )
-    db.connection.commit()
-
-    # insert new rent history
-    cursor.execute(
-        f"""
-        INSERT INTO Rent_history (
-            Start_loc,
-            Stop_loc,
-            Bike_serial,
-            User_cardID,
-            History_serial,
-            Cost,
-            Time
-        )
-        VALUES (
-            '{start_loc}', 
-            '{park_loc}', 
-            {user['Rent_bike_serial']}, 
-            {card_id}, 
-            {max_history_serial + 1},
-            {cost},
-            {time}
-        );
-    """
-    )
-    db.connection.commit()
+    try:
+        cursor.execute('START TRANSACTION')
+        cursor.execute(f'''
+            UPDATE User
+            SET Rent_bike_serial = NULL
+            WHERE CardID = {card_id}
+        ''')
+        cursor.execute(f'''
+            UPDATE Bike
+            SET 
+                Is_using = 0, 
+                Is_broken = {1 if is_broken else 0},
+                Park_loc = '{park_loc}'
+            WHERE Serial_num = {user['Rent_bike_serial']}
+        ''')
+        # insert new rent history
+        cursor.execute(f'''
+            INSERT INTO Rent_history (
+                Start_loc,
+                Stop_loc,
+                Bike_serial,
+                User_cardID,
+                History_serial,
+                Cost,
+                Time
+            )
+            VALUES (
+                '{start_loc}', 
+                '{park_loc}', 
+                {user['Rent_bike_serial']}, 
+                {card_id}, 
+                {max_history_serial + 1},
+                {cost},
+                {time}
+            )
+        ''')
+        cursor.execute('COMMIT')
+    except:
+        cursor.execute('ROLLBACK')
+        abort(500, "Error, please try again")
 
     # redirct to user homepage
     return redirect(url_for("user.user_id", card_id=card_id))
