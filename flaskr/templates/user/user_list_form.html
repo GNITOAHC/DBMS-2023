@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block body %}
+
+<h1>List bikes</h1>
+<p>Name: {{user.Name}}</p>
+<p>CardId: {{request.args.get("card_id")}}</p>
+
+<form action="#" method="post">
+  <div class="form-group">
+    <label for="location">Location:</label>
+    <select class="form-control" name="lf">
+      {% for stop in stops %}
+      <option value="{{stop.Name}}">{{stop.Name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

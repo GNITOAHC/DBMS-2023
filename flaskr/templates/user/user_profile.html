@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block body %}
+<h1>User Profile</h1>
+<p>Name: {{user.Name}}</p>
+<p>Card Id: {{request.args.get("card_id")}}</p>
+<h2>Ensurance</h2>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ensure in ensures %}
+    <tr>
+      <td>{{ ensure.Type }}</td>
+      <td>{{ ensure.Amount }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
