@@ -1,7 +1,6 @@
 from flask import (
     Blueprint,
     render_template,
-    jsonify,
     request,
     abort,
     url_for,
@@ -28,7 +27,7 @@ def user_id():
         abort(400, "Parameter not found")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
     cursor.execute(
         f"""
         SELECT * FROM User
@@ -52,7 +51,7 @@ def user_profile():
         abort(400, "Parameter not found")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     # query user data
     cursor.execute(
@@ -86,7 +85,7 @@ def user_history():
         abort(400, "Parameter not found")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     # query user data
     cursor.execute(
@@ -129,7 +128,7 @@ def user_rent():
     # get: generate the form to gather the renting info
     else:
         # query data from db
-        cursor = db.connection.cursor()
+        cursor = db.connect.cursor()
         cursor.execute(
             f"""
             SELECT * FROM User
@@ -170,7 +169,7 @@ def user_return():
     # get: generate the form to gather the renting info
     else:
         # query data from db
-        cursor = db.connection.cursor()
+        cursor = db.connect.cursor()
         cursor.execute(
             f"""
             SELECT * FROM User
@@ -209,7 +208,7 @@ def user_list():
     # get: generate the form to gather the renting info
     else:
         # query data from db
-        cursor = db.connection.cursor()
+        cursor = db.connect.cursor()
         cursor.execute(
             f"""
             SELECT * FROM User
