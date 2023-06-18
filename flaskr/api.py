@@ -222,5 +222,7 @@ def user_list_api():
     )
     bikes = cursor.fetchall()
     cursor.close()
-
+    if len(bikes) == 0:
+        abort(404, "No bike in this location")
+    
     return render_template("user/user_list_result.html", user=user, bikes=bikes)
