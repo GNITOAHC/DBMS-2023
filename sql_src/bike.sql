@@ -56,13 +56,13 @@ CREATE TABLE `Ensurance` (
 CREATE TABLE `Rent_History` (
     `Start_loc` varchar(30) NOT NULL ,
     `Stop_loc` varchar(30) NOT NULL ,
-    `Bike_serial` int  NOT NULL ,
+    `Bike_serial` int NULL ,
     `User_cardID` int  NOT NULL ,
     `History_serial` int  NOT NULL ,
     `Cost` int  NOT NULL ,
     `Time` int  NOT NULL ,
     PRIMARY KEY (
-        `Start_loc`,`Stop_loc`,`Bike_serial`,`User_cardID`,`History_serial`
+        `Start_loc`,`Stop_loc`,`User_cardID`,`History_serial`
     )
 );
 
@@ -87,8 +87,6 @@ REFERENCES `Location` (`Name`);
 ALTER TABLE `Rent_History` ADD CONSTRAINT `fk_Rent_History_Stop_loc` FOREIGN KEY(`Stop_loc`)
 REFERENCES `Location` (`Name`);
 
-ALTER TABLE `Rent_History` ADD CONSTRAINT `fk_Rent_History_Bike_serial` FOREIGN KEY(`Bike_serial`)
-REFERENCES `Bike` (`Serial_num`);
 
 ALTER TABLE `Rent_History` ADD CONSTRAINT `fk_Rent_History_User_cardID` FOREIGN KEY(`User_cardID`)
 REFERENCES `User` (`CardID`);
