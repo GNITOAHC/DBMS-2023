@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, abort, redirect, url_for
+from flask import Flask, render_template
 from dotenv import load_dotenv
 import os
 

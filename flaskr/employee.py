@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, jsonify, request, abort, url_for, redirect
+from flask import Blueprint, render_template, request, abort
 from database import db
 
 employee = Blueprint("employee", __name__, template_folder="templates")
@@ -14,7 +14,7 @@ def employee_id():
     id = request.args.get("emp_id")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
@@ -34,7 +34,7 @@ def employee_control():
     id = request.args.get("emp_id")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
@@ -52,7 +52,7 @@ def employee_maintain():
     id = request.args.get("emp_id")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
@@ -71,7 +71,7 @@ def employee_maintain_serial():
     bike_serial = request.args.get("bike_serial")
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
@@ -97,7 +97,7 @@ def employee_user_history():
         cardID = 000
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
@@ -121,7 +121,7 @@ def employee_rent_info():
         rentSerial = 000
 
     # query data from db
-    cursor = db.connection.cursor()
+    cursor = db.connect.cursor()
 
     cursor.execute(
         f"""
