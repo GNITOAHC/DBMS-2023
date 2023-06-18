@@ -29,3 +29,35 @@ def click_subordinate():
     result = cursor.fetchall()
     print(result)
     return render_template("manager/click_subordinate.html", employees=result)
+
+@manager_blueprint.route('/bike/<int:serial_num>', methods=['DELETE'])
+def delete_bike(serial_num):
+    print(123)
+    cursor = db.connection.cursor()
+    # cursor.execute(
+        # f"""
+        # SELECT Is_using
+        # FROM Bike
+        # WHERE Serial_num = {serial_num};
+        # """
+    # )
+    # result = cursor.fetchall()
+    # print(result[0]['Is_using'])
+    # if (result[0]['Is_using']):
+
+    cursor.execute(
+        f"""
+        DELETE
+        FROM Bike
+        WHERE Serial_num = {serial_num};
+        """
+    )
+    cursor.execute(
+        f"""
+        UPDATE Rent_History
+        SET Bike_serial = NULL
+        WHERE Bike_serial = {serial_num};
+        """
+    )
+    db.connection.commit()
+    return ''
