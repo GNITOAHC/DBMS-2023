@@ -31,7 +31,7 @@ def click_subordinate():
 
 @manager_blueprint.route("/bike/<int:serial_num>", methods=["DELETE"])
 def delete_bike(serial_num):
-    cursor = db.connect.cursor()
+    cursor = db.connection.cursor()
     cursor.execute(
         f"""
         DELETE
@@ -46,5 +46,5 @@ def delete_bike(serial_num):
         WHERE Bike_serial = {serial_num};
         """
     )
-    db.connect.commit()
+    db.connection.commit()
     return ""
