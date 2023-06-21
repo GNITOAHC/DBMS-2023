@@ -145,6 +145,42 @@ def user_rent():
         return render_template("user/user_rent.html", user=user, bikes=bikes)
 
 
+# get and post the renting info
+@user_blueprint.route("/ensurance", methods=["POST", "GET"])
+def user_ensure():
+    # get cardId from request arguments
+    card_id = request.args.get("card_id")
+    if card_id is None:
+        abort(400, "Parameter not found")
+
+    # post: redirect to renting api
+    if request.method == "POST":
+        typef = request.form["tf"]
+        mount = request.form["mf"]
+        cursor = db.connection.cursor()
+        cursor.execute(
+            f"""INSERT INTO Ensurance (`CardId`, `Type`, `Amount`)
+                VALUES ('{card_id}', '{typef}', '{mount}');"""
+        )
+        db.connection.commit()
+        return redirect(url_for("user.user_id", card_id=card_id))
+    # get: generate the form to gather the renting info
+    else:
+        # query data from db
+        cursor = db.connect.cursor()
+        cursor.execute(
+            f"""
+            SELECT * FROM User
+            WHERE CardID = {card_id};
+        """
+        )
+        user = cursor.fetchone()
+        if user is None:
+            abort(404, "User not found")
+        cursor.close()
+        return render_template("user/user_ensure.html", user=user)
+
+
 # FROM HERE
 # get and post the returning info
 @user_blueprint.route("/return", methods=["POST", "GET"])

@@ -63,11 +63,11 @@ app.register_blueprint(manager_blueprint, url_prefix="/manager")
 #     return render_template("500.html"), 500
 
 
-# # default error handler
-# @app.errorhandler(Exception)
-# def default_error_handler(error):
-#     app.logger.error(str(error))
-#     return render_template("500.html"), 500
+# default error handler
+@app.errorhandler(Exception)
+def default_error_handler(error):
+    app.logger.error(str(error))
+    return render_template("500.html"), 500
 
 
 if __name__ == "__main__":
