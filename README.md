@@ -30,3 +30,4 @@
 3. For youbike manager
    - List all subordinate
    - Check specific subordinate's responsibility
+   - Scrap bikes
